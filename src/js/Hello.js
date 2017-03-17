@@ -3,9 +3,10 @@
  */
 "use strict";
 
+const content = require("./../content.json");
 
 module.exports = function (){
     var oDiv = document.createElement("div");
-    oDiv.textContent = "hello world";
+    oDiv.textContent = "hello worlda";
     return oDiv;
 };
