@@ -12,9 +12,10 @@ import ReactDOM from "react-dom";
 import "./css/index.css";
 import "./scss/index.scss"
 
-
-
 import {Test} from "./js/reactTest"
+
+
+
 
 
 ReactDOM.render(

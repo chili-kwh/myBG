@@ -9,7 +9,10 @@ import content from "../content.json";
 class Test extends React.Component {
     render() {
         return (
-            <div className="test">{content.greetText}</div>
+            <div>
+                <div className="test">{content.greetText}</div>
+                <div className="testPic">efarew</div>
+            </div>
         )
     }
 }

@@ -1,4 +1,9 @@
 .test{
   font-size: 20px;
-  color: blue;
+  color: $red;
 }
+
+.testPic{
+  background: url(../../img/test2.png);
+}
+
