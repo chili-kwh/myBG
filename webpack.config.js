@@ -24,7 +24,8 @@ module.exports = {
         filename: '[name].[hash].js',   //打包后输出文件的文件名
     },
     // devtool: "source-map",  //配置生成Source Maps，选择合适的选项
-    devtool: "eval-source-map",
+    // devtool: "eval-source-map",
+    devtool: false,
     // devtool: "cheap-module-source-map",
     // devtool: "cheap-module-eval-source-map",
     devServer: {
@@ -83,12 +84,44 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: path.join(__dirname, "/src/css/"),
-                use: extractCSS.extract(['css-loader'])
+                use: extractCSS.extract({
+                    use: [
+                        'css-loader',
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    require("precss"), // 文档中有加，不知道为什么，不加autoprefixer不起作用
+                                    require("autoprefixer")
+                                ]
+                            }
+                        },
+                    ]
+                })
             },
             {
                 test: /\.scss$/,
                 include: path.join(__dirname, "/src/scss/"),
-                use: extractSCSS.extract(['css-loader', 'sass-loader'])
+                use: extractSCSS.extract({
+                    use: [
+                        'css-loader',
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: [
+                                    require("autoprefixer")
+                                ]
+                                // plugins: function() {
+                                //     return [
+                                //         require("autoprefixer")
+                                //     ]
+                                // }
+                            }
+                        },
+                        'sass-loader',
+                    ]
+                })
+
             },
 
 
