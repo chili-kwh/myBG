@@ -19,8 +19,8 @@ module.exports = {
     },
 
     output: {
-        // path: __dirname + "/pub",  //打包后的文件存放的地方
-        path: path.resolve(__dirname, 'build'),  //打包后的文件存放的地方
+        path: path.join(__dirname, 'build'),  //打包后的文件存放的地方 TODO 不在目录结构里
+        // path: '/build/',  //打包后的文件存放的地方
         filename: '[name].[hash].js',   //打包后输出文件的文件名
     },
     // devtool: "source-map",  //配置生成Source Maps，选择合适的选项
@@ -29,9 +29,10 @@ module.exports = {
     // devtool: "cheap-module-eval-source-map",
     devServer: {
         port: 8081,
-        contentBase: "./pub",  //本地服务器所加载的页面所在的目录
-        historyApiFallback: true,  //不跳转
-        inline: true  //实时刷新
+        // contentBase: "./pub",  //本地服务器所加载的页面所在的目录
+        historyApiFallback: true,  //不跳转??
+        inline: true,  //实时刷新
+        hot: true
     },
 
     module: {
@@ -43,7 +44,35 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ["es2015", 'react']
+                            presets: ["es2015", 'react'],
+                            // plugins: [
+                            //     // "react-hot-loader"
+                            //     // Enables React code to work with HMR.
+                            // ]
+                            //http://www.jianshu.com/p/42e11515c10f
+                            // 使用react-transform-hmr
+                            // 可以实现不刷新页面的react的HMR
+                            //but what && why??
+                            //https://www.npmjs.com/package/react-transform-hmr
+                            "env": {
+                                // only enable it when process.env.NODE_ENV is 'development' or undefined
+                                "development": {
+                                    "plugins": [["react-transform", {
+                                        "transforms": [{
+                                            "transform": "react-transform-hmr",
+                                            // if you use React Native, pass "react-native" instead:
+                                            "imports": ["react"],
+                                            // this is important for Webpack HMR:
+                                            "locals": ["module"]
+                                        }]
+                                        // note: you can put more transforms into array
+                                        // this is just one of them!
+                                    }]]
+                                }
+                            }
+                            // Make sure you process files with babel-loader,
+                            // and that you don’t use React Hot Loader (it’s not needed with this transform).
+                            /////////////
                         }
                     },
                 ]
@@ -53,6 +82,7 @@ module.exports = {
 
             {
                 test: /\.css$/,
+                include: path.join(__dirname, "/src/css/"),
                 use: extractCSS.extract(['css-loader'])
             },
             {
@@ -98,7 +128,24 @@ module.exports = {
         }),
 
         extractCSS,
-        extractSCSS
+        extractSCSS,
+
+
+        // new webpack.HotModuleReplacementPlugin(),
+        // enable HMR globally
+        // "build": "webpack-dev-server --hot --inline --open"
+        // http://www.jianshu.com/p/976ca21c9245
+        // Uncaught RangeError: Maximum call stack size exceeded
+        // 这里注意如果利用webpack-dev-server cli 并且加了--hot 这个选项，
+        // 就不要在这里加入new webpack.HotModuleReplacementPlugin()这个插件了，
+        // 否则会报Maximum call stack size exceeded错误。
+
+        new webpack.NamedModulesPlugin(),
+        // prints more readable module names in the browser console on HMR updates
+
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify("development")
+        })
 
     ]
 
@@ -106,7 +153,10 @@ module.exports = {
     // https://github.com/gaearon/react-hot-loader
     // url-loader
     //TODO node_env
+    //按需加载https://webpack.js.org/guides/code-splitting-require/
     //热加载
+    //TODO react-transform-hmr
+    //https://www.npmjs.com/package/react-transform-hmr
 
 };
 

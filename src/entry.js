@@ -3,16 +3,16 @@
  */
 "use strict";
 
-// var hello = require("./Hello.js");
-// document.getElementById("root").appendChild(hello());
 
 
 import React from "react";
 import ReactDOM from "react-dom";
 import "./css/index.css";
 import "./scss/index.scss"
+import "./tool"
 
 import {Test} from "./js/reactTest"
+import {isDebugServer} from "./tool/function/index";
 
 
 

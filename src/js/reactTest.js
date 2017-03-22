@@ -10,8 +10,8 @@ class Test extends React.Component {
     render() {
         return (
             <div>
-                <div className="test">{content.greetText}</div>
-                <div className="testPic">efarew</div>
+                <div className="test">{content.greetText}富商大</div>
+                <div className="testPic">efarfcdsadsfewfdsaffsfdsadsfa</div>
             </div>
         )
     }
