@@ -11,7 +11,7 @@ class Test extends React.Component {
         return (
             <div>
                 <div className="test">{content.greetText}富商大</div>
-                <div className="testPic">efarfcdsadsfewfdsaffsfdsadsfa</div>
+                <div className="testPic">efarfcdsfewfdsaffsfdsadsfa</div>
             </div>
         )
     }
