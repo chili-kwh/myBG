@@ -1,0 +1,31 @@
+{
+  "presets": ["es2015", "react"],
+  // plugins: [
+  //     // "react-hot-loader"
+  //     // Enables React code to work with HMR.
+  // ]
+  //http://www.jianshu.com/p/42e11515c10f
+  // 使用react-transform-hmr
+  // 可以实现不刷新页面的react的HMR
+  //but what && why??
+  //https://www.npmjs.com/package/react-transform-hmr
+  "env": {
+    // only enable it when process.env.NODE_ENV is 'development' or undefined
+    "development": {
+      "plugins": [["react-transform", {
+        "transforms": [{
+          "transform": "react-transform-hmr",
+          // if you use React Native, pass "react-native" instead:
+          "imports": ["react"],
+          // this is important for Webpack HMR:
+          "locals": ["module"]
+        }]
+        // note: you can put more transforms into array
+        // this is just one of them!
+      }]]
+    }
+  }
+  // Make sure you process files with babel-loader,
+  // and that you don’t use React Hot Loader (it’s not needed with this transform).
+  /////////////
+}
