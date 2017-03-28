@@ -16,6 +16,8 @@ class Test extends React.Component {
     render() {
         return (
             <div>
+                {/*{this.props.children}*/}
+                <a href="./route">link</a>
                 <div className="test">{content.greetText}富dd商大</div>
                 <div className="testPic"
                     onClick={()=>{

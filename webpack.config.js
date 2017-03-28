@@ -24,8 +24,8 @@ module.exports = {
         filename: '[name].[hash].js',   //打包后输出文件的文件名
     },
     // devtool: "source-map",  //配置生成Source Maps，选择合适的选项
-    // devtool: "eval-source-map",
-    devtool: false,
+    devtool: "eval-source-map",
+    // devtool: false,
     // devtool: "cheap-module-source-map",
     // devtool: "cheap-module-eval-source-map",
     devServer: {
