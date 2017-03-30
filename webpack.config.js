@@ -21,6 +21,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'build'),  //打包后的文件存放的地方 TODO 不在目录结构里
         // path: '/build/',  //打包后的文件存放的地方
+        publicPath: '/', //TODO !!!!!!!没加这个路由会失效，为什么！！！！！！！！
         filename: '[name].[hash].js',   //打包后输出文件的文件名
     },
     // devtool: "source-map",  //配置生成Source Maps，选择合适的选项
