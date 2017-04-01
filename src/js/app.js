@@ -19,17 +19,20 @@ import * as allPages from "../page"
 class PageRoot extends React.Component {
     render() {
         return (
-            <BrowserRouter>
-                <div>
-                    {/*<Route path="/" component={allPages.Test}>*/}
-                    撒割发代首
-                    <Route path="/">
-
-                        <Route path="/route" component={allPages.Test2}/>
-                    </Route>
-                </div>
-            </BrowserRouter>
+            <div>就看个人活动</div>
         )
+        // return (
+        //     <BrowserRouter>
+        //         <div>
+        //             {/*<Route path="/" component={allPages.Test}>*/}
+        //             撒割发代首
+        //             <Route path="/">
+        //
+        //                 <Route path="/route" component={allPages.Test2}/>
+        //             </Route>
+        //         </div>
+        //     </BrowserRouter>
+        // )
     }
 }
 

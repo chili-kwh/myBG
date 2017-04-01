@@ -10,6 +10,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('css.[contenthash].css');
 const extractSCSS = new ExtractTextPlugin('scss.[contenthash].css');
 
+console.log(__dirname);
 
 module.exports = {
     //__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录
@@ -19,12 +20,14 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, 'build'),  //打包后的文件存放的地方 TODO 不在目录结构里
-        // path: '/build/',  //打包后的文件存放的地方
+        path: path.resolve(__dirname, 'build'),  //打包后的文件存放的地方 TODO 不在目录结构里
+        // path: path.join(__dirname, 'build'),  //打包后的文件存放的地方 TODO 不在目录结构里
+        publicPath: '/', //TODO !!!!!!!没加这个路由会失效，为什么！！！！！！！！
+        //https://webpack.js.org/configuration/output/#output-publicpath
         filename: '[name].[hash].js',   //打包后输出文件的文件名
     },
-    // devtool: "source-map",  //配置生成Source Maps，选择合适的选项
-    devtool: "eval-source-map",
+    devtool: "source-map",  //配置生成Source Maps，选择合适的选项
+    // devtool: "eval-source-map",
     // devtool: false,
     // devtool: "cheap-module-source-map",
     // devtool: "cheap-module-eval-source-map",
@@ -150,8 +153,11 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: __dirname + "/src/index.html"
+            // template: __dirname + "/src/index.html"
+            template: "src/index.html",
+            hash: true
         }),
+
 
         new webpack.optimize.CommonsChunkPlugin({
             names: [
